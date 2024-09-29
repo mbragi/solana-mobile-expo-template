@@ -1,3 +1,4 @@
+import React from "react";
 import { useAuthorization } from "../utils/useAuthorization";
 import { StyleSheet, View } from "react-native";
 
@@ -5,9 +6,7 @@ export default function AccountScreen() {
   const { selectedAccount } = useAuthorization();
 
   return (
-    <>
-      <View style={styles.screenContainer}></View>
-    </>
+    <View style={styles.screenContainer}></View>
   );
 }
 

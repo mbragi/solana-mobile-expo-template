@@ -52,7 +52,7 @@ const AppStack = () => {
     <Stack.Navigator initialRouteName={"Home"}>
       <Stack.Screen
         name="HomeStack"
-        component={HomeNavigator}
+        component={Screens.HomeScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Settings" component={Screens.SettingsScreen} />

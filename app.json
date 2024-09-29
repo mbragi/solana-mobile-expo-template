@@ -1,30 +1,36 @@
 {
   "expo": {
-    "name": "solana-mobile-expo-template",
-    "slug": "solana-mobile-expo-template",
+    "name": "solana-trash-coin",
+    "slug": "solana-trash-coin",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#121212"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#2cc15c"
+      },
+      "package": "com.bragimangee.solanatrashcoin"
     },
     "web": {
+      "bundler": "metro",
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2c3633bb-3939-4f52-975d-2f2f3eadfd5a"
+      }
+    },
+    "owner": "bragimangee"
   }
 }

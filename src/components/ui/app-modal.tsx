@@ -1,3 +1,4 @@
+import React from "react";
 import { ViewStyle, View, StyleSheet } from "react-native";
 import { Modal, Text, Button, Portal, useTheme } from "react-native-paper";
 
@@ -20,7 +21,7 @@ export function AppModal({
   submit,
   submitDisabled,
   submitLabel = "Save", // Defaulting submitLabel to "Save" here
-}: AppModalProps) {
+}: Readonly<AppModalProps>) {
   const theme = useTheme();
   return (
     <Portal>

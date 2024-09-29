@@ -1,10 +1,10 @@
 // Polyfills
-import "./src/polyfills";
+import "@/polyfills";
 
-import { StyleSheet, useColorScheme } from "react-native";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { ConnectionProvider } from "./src/utils/ConnectionProvider";
+import { ConnectionProvider } from "@/utils/ConnectionProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   DarkTheme as NavigationDarkTheme,
@@ -16,10 +16,17 @@ import {
   MD3LightTheme,
   adaptNavigationTheme,
 } from "react-native-paper";
-import { AppNavigator } from "./src/navigators/AppNavigator";
-import { ClusterProvider } from "./src/components/cluster/cluster-data-access";
+import { AppNavigator } from "@/navigators/AppNavigator";
+import { ClusterProvider } from "@/components/cluster/cluster-data-access";
+import * as SplashScreen from "expo-splash-screen";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import React, { useEffect } from "react";
+import { useFonts } from "expo-font"; 
 
 const queryClient = new QueryClient();
+
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const colorScheme = useColorScheme();
@@ -44,6 +51,21 @@ export default function App() {
       ...DarkTheme.colors,
     },
   };
+
+  const [loaded] = useFonts({
+    SpaceMono: require("./assets/fonts/SpaceMono-Regular.ttf"),
+  });
+
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <ClusterProvider>

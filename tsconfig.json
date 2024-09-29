@@ -1,6 +1,13 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@assets": ["./assets/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "../trash-coin-mobile/react-native.d.ts"]
 }

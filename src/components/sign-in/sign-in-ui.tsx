@@ -1,14 +1,17 @@
-import { transact } from "@solana-mobile/mobile-wallet-adapter-protocol";
-import { useState, useCallback } from "react";
-import { Button } from "react-native-paper";
-import { alertAndLog } from "../../utils/alertAndLog";
-import { useAuthorization } from "../../utils/useAuthorization";
-import { useMobileWallet } from "../../utils/useMobileWallet";
+import React, { useState, useCallback } from "react";
+
+import { alertAndLog } from "@/utils/alertAndLog";
+import { useAuthorization } from "@/utils/useAuthorization";
+import { useMobileWallet } from "@/utils/useMobileWallet";
+import { Linking, Platform } from "react-native";
+import { CustomButton } from "@/components/ui/button";
+import { SolanaMobileWalletAdapterError } from "@solana-mobile/mobile-wallet-adapter-protocol";
 
 export function ConnectButton() {
   const { authorizeSession } = useAuthorization();
   const { connect } = useMobileWallet();
   const [authorizationInProgress, setAuthorizationInProgress] = useState(false);
+
   const handleConnectPress = useCallback(async () => {
     try {
       if (authorizationInProgress) {
@@ -17,26 +20,49 @@ export function ConnectButton() {
       setAuthorizationInProgress(true);
       await connect();
     } catch (err: any) {
-      alertAndLog(
-        "Error during connect",
-        err instanceof Error ? err.message : err
-      );
+      console.log("Error caught:", err);
+
+      if (
+        err instanceof SolanaMobileWalletAdapterError || 
+        err?.message?.includes("Found no installed wallet that supports the mobile wallet protocol")
+      ) {
+        // If no wallet is found, redirect to the Play Store or App Store
+        const url =
+          Platform.OS === "android"
+            ? "https://play.google.com/store/apps/details?id=app.phantom" // Android URL
+            : "https://apps.apple.com/app/phantom-solana-wallet/id1598432977"; // iOS URL
+
+        Linking.openURL(url).catch((error) => {
+          alertAndLog('Failed to Link to PlayStore', error.message)
+        });
+      } else {
+        // Log any other unexpected errors
+        alertAndLog('Unable to connect wallet', err)
+      }
     } finally {
       setAuthorizationInProgress(false);
     }
   }, [authorizationInProgress, authorizeSession]);
+
   return (
-    <Button
+    <CustomButton
       mode="contained"
       disabled={authorizationInProgress}
       onPress={handleConnectPress}
-      style={{ flex: 1 }}
+      style={{
+        backgroundColor: "#2cc15c",
+        borderRadius: 25,
+        height: 50,
+        justifyContent: "center",
+        alignItems: "center",
+        width: "80%",
+        bottom: "5%",
+      }}
     >
-      Connect
-    </Button>
+      Connect Wallet
+    </CustomButton>
   );
 }
-
 export function SignInButton() {
   const { authorizeSession } = useAuthorization();
   const { signIn } = useMobileWallet();
@@ -62,13 +88,13 @@ export function SignInButton() {
     }
   }, [signInInProgress, authorizeSession]);
   return (
-    <Button
+    <CustomButton
       mode="outlined"
       disabled={signInInProgress}
       onPress={handleConnectPress}
       style={{ marginLeft: 4, flex: 1 }}
     >
       Sign in
-    </Button>
+    </CustomButton>
   );
 }
