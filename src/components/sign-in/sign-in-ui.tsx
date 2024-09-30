@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from "react";
 
 import { alertAndLog } from "@/utils/alertAndLog";
-import { useAuthorization } from "@/utils/useAuthorization";
-import { useMobileWallet } from "@/utils/useMobileWallet";
+import { useAuthorization } from "@/hooks/useAuthorization";
+import { useMobileWallet } from "@/hooks/useMobileWallet";
 import { Linking, Platform } from "react-native";
 import { CustomButton } from "@/components/ui/button";
 import { SolanaMobileWalletAdapterError } from "@solana-mobile/mobile-wallet-adapter-protocol";

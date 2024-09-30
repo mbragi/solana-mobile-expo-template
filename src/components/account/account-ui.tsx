@@ -16,7 +16,7 @@ import {
   TextInput,
 } from "react-native-paper";
 import { useState, useMemo } from "react";
-import { ellipsify } from "../../utils/ellipsify";
+import { ellipsify } from "@/utils/ellipsify";
 import { AppModal } from "../ui/app-modal";
 import React from "react";
 
@@ -92,11 +92,11 @@ export function AirdropRequestModal({
   hide,
   show,
   address,
-}: {
+}: Readonly<{
   hide: () => void;
   show: boolean;
   address: PublicKey;
-}) {
+}>) {
   const requestAirdrop = useRequestAirdrop({ address });
 
   return (

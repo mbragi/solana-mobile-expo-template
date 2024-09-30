@@ -1,8 +1,8 @@
 import { Button, IconButton, Menu, useTheme } from "react-native-paper";
-import { Account, useAuthorization } from "../../utils/useAuthorization";
-import { useMobileWallet } from "../../utils/useMobileWallet";
+import { Account, useAuthorization } from "@/hooks/useAuthorization";
+import { useMobileWallet } from "@/hooks/useMobileWallet";
 import { useNavigation } from "@react-navigation/native";
-import { ellipsify } from "../../utils/ellipsify";
+import { ellipsify } from "@/utils/ellipsify";
 import { useState } from "react";
 import * as Clipboard from "expo-clipboard";
 import { Linking } from "react-native";
@@ -38,7 +38,7 @@ export function TopBarSettingsButton() {
       icon="cog"
       mode="contained-tonal"
       onPress={() => {
-        navigation.navigate("Settings");
+        // navigation.navigate("Settings");
       }}
     />
   );

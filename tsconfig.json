@@ -3,10 +3,9 @@
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
-    "jsx": "react",
     "paths": {
       "@/*": ["./src/*"],
-      "@assets": ["./assets/*"]
+      "@assets/*": ["./assets/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "../trash-coin-mobile/react-native.d.ts"]
