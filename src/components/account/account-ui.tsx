@@ -5,7 +5,7 @@ import {
   useGetTokenAccounts,
   useRequestAirdrop,
   useTransferSol,
-} from "./account-data-access";
+} from "@/hooks/account-data-access.hooks";
 import { View, StyleSheet, ScrollView } from "react-native";
 import {
   Text,

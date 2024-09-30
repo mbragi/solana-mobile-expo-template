@@ -1,4 +1,3 @@
-// import ComingSoonScreen from "@/screens/ComingSoon";
 
 import { ExploreScreen } from "@/screens/ExploreScreen";
 

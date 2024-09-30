@@ -2,6 +2,7 @@ import { FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { View, Text, Image, SafeAreaView, StyleSheet } from "react-native";
+import AssetsCard from "../ui/AssestsCard";
 
 export function ProfileFeature() {
   return (
@@ -22,16 +23,8 @@ export function ProfileFeature() {
         </View>
       </View>
 
-      {/* Assets Section */}
-      <LinearGradient
-        colors={["#4CAF50", "#FFFFFF"]} // Green to white
-        start={{ x: 0, y: 0 }} // Starting point (left)
-        end={{ x: 2, y: 0 }} // Ending point (right)
-        style={styles.assetsSection}
-      >
-        <Text style={styles.assetsTitle}>ASSETS</Text>
-        <Text style={styles.assetsAmount}>2,000 Trc</Text>
-      </LinearGradient>
+       {/* Assets Section */}
+       <AssetsCard title="ASSET BALANCE" amount="2,000 TRC" />
 
       {/* Categories (Airtime, Data, TV, Electricity) */}
       <View style={styles.categoriesContainer}>
@@ -108,7 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "black",
-    height: 100,
+    position:'relative'
   },
   header: {
     padding: 16,

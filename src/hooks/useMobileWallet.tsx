@@ -9,7 +9,7 @@ import { useCallback, useMemo } from "react";
 import { SignInPayload } from "@solana-mobile/mobile-wallet-adapter-protocol";
 
 export function useMobileWallet() {
-  const { authorizeSessionWithSignIn, authorizeSession, deauthorizeSession } =
+  const { authorizeSession, deauthorizeSession } =
     useAuthorization();
 
   const connect = useCallback(async (): Promise<Account> => {
@@ -18,14 +18,14 @@ export function useMobileWallet() {
     });
   }, [authorizeSession]);
 
-  const signIn = useCallback(
-    async (signInPayload: SignInPayload): Promise<Account> => {
-      return await transact(async (wallet) => {
-        return await authorizeSessionWithSignIn(wallet, signInPayload);
-      });
-    },
-    [authorizeSession]
-  );
+  // const signIn = useCallback(
+  //   async (signInPayload: SignInPayload): Promise<Account> => {
+  //     return await transact(async (wallet) => {
+  //       return await authorizeSessionWithSignIn(wallet, signInPayload);
+  //     });
+  //   },
+  //   [authorizeSession]
+  // );
 
   const disconnect = useCallback(async (): Promise<void> => {
     await transact(async (wallet) => {
@@ -65,7 +65,7 @@ export function useMobileWallet() {
   return useMemo(
     () => ({
       connect,
-      signIn,
+      // signIn,
       disconnect,
       signAndSendTransaction,
       signMessage,

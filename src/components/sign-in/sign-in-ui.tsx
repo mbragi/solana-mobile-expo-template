@@ -63,38 +63,38 @@ export function ConnectButton() {
     </CustomButton>
   );
 }
-export function SignInButton() {
-  const { authorizeSession } = useAuthorization();
-  const { signIn } = useMobileWallet();
-  const [signInInProgress, setSignInInProgress] = useState(false);
-  const handleConnectPress = useCallback(async () => {
-    try {
-      if (signInInProgress) {
-        return;
-      }
-      setSignInInProgress(true);
-      await signIn({
-        domain: "yourdomain.com",
-        statement: "Sign into Expo Template App",
-        uri: "https://yourdomain.com",
-      });
-    } catch (err: any) {
-      alertAndLog(
-        "Error during sign in",
-        err instanceof Error ? err.message : err
-      );
-    } finally {
-      setSignInInProgress(false);
-    }
-  }, [signInInProgress, authorizeSession]);
-  return (
-    <CustomButton
-      mode="outlined"
-      disabled={signInInProgress}
-      onPress={handleConnectPress}
-      style={{ marginLeft: 4, flex: 1 }}
-    >
-      Sign in
-    </CustomButton>
-  );
-}
+// export function SignInButton() {
+//   const { authorizeSession } = useAuthorization();
+//   const { signIn } = useMobileWallet();
+//   const [signInInProgress, setSignInInProgress] = useState(false);
+//   const handleConnectPress = useCallback(async () => {
+//     try {
+//       if (signInInProgress) {
+//         return;
+//       }
+//       setSignInInProgress(true);
+//       await signIn({
+//         domain: "yourdomain.com",
+//         statement: "Sign into Expo Template App",
+//         uri: "https://yourdomain.com",
+//       });
+//     } catch (err: any) {
+//       alertAndLog(
+//         "Error during sign in",
+//         err instanceof Error ? err.message : err
+//       );
+//     } finally {
+//       setSignInInProgress(false);
+//     }
+//   }, [signInInProgress, authorizeSession]);
+//   return (
+//     <CustomButton
+//       mode="outlined"
+//       disabled={signInInProgress}
+//       onPress={handleConnectPress}
+//       style={{ marginLeft: 4, flex: 1 }}
+//     >
+//       Sign in
+//     </CustomButton>
+//   );
+// }

@@ -9,14 +9,14 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
 import { useMobileWallet } from "@/hooks/useMobileWallet";
 import { useAuthorization } from "@/hooks/useAuthorization";
+import AssetsCard from "@/components/ui/AssestsCard"; // Import the new component
 
 export default function Tab() {
   const { disconnect } = useMobileWallet();
-  const { accounts, selectedAccount } = useAuthorization();
-  console.log({ selectedAccount });
+  const { selectedAccount } = useAuthorization();
+
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
@@ -44,15 +44,7 @@ export default function Tab() {
       </View>
 
       {/* Assets Section */}
-      <LinearGradient
-        colors={["#4CAF50", "#FFFFFF"]} // Green to white
-        start={{ x: 0, y: 0 }} // Starting point (left)
-        end={{ x: 2, y: 0 }} // Ending point (right)
-        style={styles.assetsContainer}
-      >
-        <Text style={styles.assetsTitle}>ASSETS</Text>
-        <Text style={styles.assetsAmount}>2,000 TRC</Text>
-      </LinearGradient>
+      <AssetsCard title="ASSET BALANCE" amount="2,000 TRC" />
 
       {/* Collectibles Section */}
       <ScrollView style={styles.collectiblesContainer}>
@@ -116,19 +108,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-  },
-  assetsContainer: {
-    marginHorizontal: 16,
-    padding: 32,
-    borderRadius: 8,
-  },
-  assetsTitle: {
-    color: "white",
-  },
-  assetsAmount: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "white",
   },
   collectiblesContainer: {
     flex: 1,
