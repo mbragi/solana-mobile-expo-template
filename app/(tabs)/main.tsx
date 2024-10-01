@@ -44,7 +44,7 @@ export default function Tab() {
       </View>
 
       {/* Assets Section */}
-      <AssetsCard title="ASSET BALANCE" amount="2,000 TRC" />
+      <AssetsCard title="ASSET BALANCE" amount="2,000 TRC" address={selectedAccount.publicKey} />
 
       {/* Collectibles Section */}
       <ScrollView style={styles.collectiblesContainer}>

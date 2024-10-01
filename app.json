@@ -6,11 +6,11 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "automatic",
-    "scheme":"solana-trash-coin",
+    "scheme": "solana-trash-coin",
     "splash": {
       "image": "./assets/images/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#121212"
+      "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -23,7 +23,10 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#2cc15c"
       },
-      "package": "com.bragimangee.solanatrashcoin"
+      "package": "com.bragimangee.solanatrashcoin",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -38,6 +41,15 @@
     "plugins": [
       "expo-router",
       "expo-image-picker"
-    ]
+    ],
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_ERROR_RECOVERY",
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/2c3633bb-3939-4f52-975d-2f2f3eadfd5a"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }

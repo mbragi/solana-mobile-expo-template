@@ -164,10 +164,10 @@ export function useAuthorization() {
 
   return useMemo(
     () => ({
-      accounts: authorization?.accounts ?? null,
+      accounts: authorization?.accounts,
       authorizeSession,
       deauthorizeSession,
-      selectedAccount: authorization?.selectedAccount ?? null,
+      selectedAccount: authorization?.selectedAccount,
       isLoading,
     }),
     [authorization, authorizeSession, deauthorizeSession]

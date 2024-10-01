@@ -46,45 +46,45 @@ export function AccountButtonGroup({ address }: { address: PublicKey }) {
 
   return (
     <View style={styles.accountButtonGroup}>
-        <AirdropRequestModal
-          hide={() => setShowAirdropModal(false)}
-          show={showAirdropModal}
-          address={address}
-        />
-        <TransferSolModal
-          hide={() => setShowSendModal(false)}
-          show={showSendModal}
-          address={address}
-        />
-        <ReceiveSolModal
-          hide={() => setShowReceiveModal(false)}
-          show={showReceiveModal}
-          address={address}
-        />
-        <Button
-          mode="contained"
-          disabled={requestAirdrop.isPending}
-          onPress={() => {
-            setShowAirdropModal(true);
-          }}
-        >
-          Airdrop
-        </Button>
-        <Button
-          mode="contained"
-          onPress={() => setShowSendModal(true)}
-          style={{ marginLeft: 6 }}
-        >
-          Send
-        </Button>
-        <Button
-          mode="contained"
-          onPress={() => setShowReceiveModal(true)}
-          style={{ marginLeft: 6 }}
-        >
-          Receive
-        </Button>
-      </View>
+      <AirdropRequestModal
+        hide={() => setShowAirdropModal(false)}
+        show={showAirdropModal}
+        address={address}
+      />
+      <TransferSolModal
+        hide={() => setShowSendModal(false)}
+        show={showSendModal}
+        address={address}
+      />
+      <ReceiveSolModal
+        hide={() => setShowReceiveModal(false)}
+        show={showReceiveModal}
+        address={address}
+      />
+      <Button
+        mode="contained"
+        disabled={requestAirdrop.isPending}
+        onPress={() => {
+          setShowAirdropModal(true);
+        }}
+      >
+        Airdrop
+      </Button>
+      <Button
+        mode="contained"
+        onPress={() => setShowSendModal(true)}
+        style={{ marginLeft: 6 }}
+      >
+        Send
+      </Button>
+      <Button
+        mode="contained"
+        onPress={() => setShowReceiveModal(true)}
+        style={{ marginLeft: 6 }}
+      >
+        Receive
+      </Button>
+    </View>
   );
 }
 
@@ -280,7 +280,7 @@ export function AccountTokenBalance({ address }: { address: PublicKey }) {
   return query.isLoading ? (
     <ActivityIndicator animating={true} />
   ) : query.data ? (
-    <Text>{query.data?.value.uiAmount}</Text>
+    <Text style={styles.accountBalance}>{query.data?.value.uiAmount}</Text>
   ) : (
     <Text>Error</Text>
   );
@@ -297,5 +297,11 @@ const styles = StyleSheet.create({
   error: {
     color: "red",
     padding: 8,
+  },
+  accountToken: {
+    fontSize: 32,
+    fontWeight: "bold",
+    marginTop: 14,
+    color: "white",
   },
 });

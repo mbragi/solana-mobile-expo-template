@@ -5,6 +5,7 @@ import { router } from "expo-router";
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
 import { SafeAreaView } from "react-native";
 
+
 export default function App() {
   const { selectedAccount } = useAuthorization();
 
@@ -15,27 +16,10 @@ export default function App() {
   }, [selectedAccount]);
 
   if (selectedAccount) {
-    return (
-      <SafeAreaView
-        style={{
-          flex: 1,
-          backgroundColor: "black",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <ActivityIndicator
-          animating={true}
-          color={MD2Colors.green400}
-          size={40}
-        />
-      </SafeAreaView>
-    );
+    return null
   }
 
   return (
-    <>
-      <OnboardFeature />
-    </>
+    <OnboardFeature />
   );
 }

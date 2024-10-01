@@ -1,4 +1,5 @@
-import "@/utils/polyfills";
+// import "@/utils/polyfills";
+import "react-native-reanimated";
 
 import {
   DarkTheme,
@@ -9,10 +10,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { SafeAreaView, StatusBar } from "react-native";
-import { StyleSheet } from "react-native";
-
-import "react-native-reanimated";
+import { SafeAreaView, StatusBar,StyleSheet } from "react-native";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -57,13 +55,12 @@ export default function RootLayout() {
                   }
                   backgroundColor="black"
                 />
-                <Stack initialRouteName="index">
+                <Stack>
                   <Stack.Screen name="index" options={{ headerShown: false }} />
                   <Stack.Screen
                     name="(tabs)"
                     options={{ headerShown: false }}
                   />
-                  <Stack.Screen name='settings' options={{headerShown: false}} />
                 </Stack>
               </ThemeProvider>
             </PaperProvider>

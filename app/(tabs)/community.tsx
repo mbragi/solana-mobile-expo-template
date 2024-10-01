@@ -1,4 +1,4 @@
-import ComingSoonScreen from "@/screens/ComingSoon";
+import ComingSoonScreen from "@/components/ComingSoon";
 
 export default function Tab() {
   return <ComingSoonScreen />;

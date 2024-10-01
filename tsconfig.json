@@ -8,5 +8,5 @@
       "@assets/*": ["./assets/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "../trash-coin-mobile/react-native.d.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "../trash-coin-mobile/react-native.d.ts", "index.ts"]
 }

@@ -6,14 +6,14 @@ import { ellipsify } from "@/utils/ellipsify";
 import { useState } from "react";
 import * as Clipboard from "expo-clipboard";
 import { Linking } from "react-native";
-import { useCluster } from "../cluster/cluster-data-access";
+import { useCluster } from "@/components/cluster/cluster-data-access";
 import React from "react";
 
 export function TopBarWalletButton({
   selectedAccount,
   openMenu,
 }: {
-  selectedAccount: Account | null;
+  selectedAccount: Account;
   openMenu: () => void;
 }) {
   const { connect } = useMobileWallet();
@@ -75,7 +75,7 @@ export function TopBarWalletMenu() {
       onDismiss={closeMenu}
       anchor={
         <TopBarWalletButton
-          selectedAccount={selectedAccount}
+          selectedAccount={selectedAccount as Account}
           openMenu={openMenu}
         />
       }

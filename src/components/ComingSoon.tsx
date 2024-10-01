@@ -6,7 +6,7 @@ const ComingSoonScreen = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Coming Soon</Text>
       <Text style={styles.message}>
-        Stay tuned for exciting community features!
+        Stay tuned for this exciting feature! 
       </Text>
     </View>
   );
