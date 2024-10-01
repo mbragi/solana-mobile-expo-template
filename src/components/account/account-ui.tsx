@@ -14,31 +14,34 @@ import {
   ActivityIndicator,
   DataTable,
   TextInput,
+  MD2Colors,
 } from "react-native-paper";
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { ellipsify } from "@/utils/ellipsify";
 import { AppModal } from "../ui/app-modal";
-import React from "react";
 
 function lamportsToSol(balance: number) {
   return Math.round((balance / LAMPORTS_PER_SOL) * 100000) / 100000;
 }
 
-export function AccountBalance({ address }: { address: PublicKey }) {
+export function AccountBalance({ address }: { readonly address: PublicKey }) {
   const query = useGetBalance({ address });
   return (
-    <>
-      <View style={styles.accountBalance}>
-        <Text variant="titleMedium">Current Balance</Text>
-        <Text variant="displayLarge">
-          {query.data ? lamportsToSol(query.data) : "..."} SOL
-        </Text>
-      </View>
-    </>
+    <View style={styles.accountBalance}>
+      {query.isLoading ? (
+        <ActivityIndicator animating={true} color={MD2Colors.green200} size={40}/>
+      ) : query.data !== undefined ? (
+        <Text variant='displayMedium' style={{color: 'white'}}>{lamportsToSol(query.data)} SOL</Text>
+      ) : (
+        <Text variant='displayMedium' style={{color: 'white'}}>0</Text>
+      )}
+    </View>
   );
 }
 
-export function AccountButtonGroup({ address }: { address: PublicKey }) {
+export function AccountButtonGroup({
+  address,
+}: Readonly<{ address: PublicKey }>) {
   const requestAirdrop = useRequestAirdrop({ address });
   const [showAirdropModal, setShowAirdropModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
@@ -124,9 +127,9 @@ export function TransferSolModal({
   show,
   address,
 }: {
-  hide: () => void;
-  show: boolean;
-  address: PublicKey;
+  readonly hide: () => void;
+  readonly show: boolean;
+  readonly address: PublicKey;
 }) {
   const transferSol = useTransferSol({ address });
   const [destinationAddress, setDestinationAddress] = useState("");
@@ -171,11 +174,11 @@ export function ReceiveSolModal({
   hide,
   show,
   address,
-}: {
+}: Readonly<{
   hide: () => void;
   show: boolean;
   address: PublicKey;
-}) {
+}>) {
   return (
     <AppModal title="Receive assets" hide={hide} show={show}>
       <View style={{ padding: 4 }}>
@@ -188,7 +191,7 @@ export function ReceiveSolModal({
   );
 }
 
-export function AccountTokens({ address }: { address: PublicKey }) {
+export function AccountTokens({ address }: { readonly address: PublicKey }) {
   let query = useGetTokenAccounts({ address });
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 3; // Items per page
@@ -277,18 +280,21 @@ export function AccountTokens({ address }: { address: PublicKey }) {
 
 export function AccountTokenBalance({ address }: { address: PublicKey }) {
   const query = useGetTokenAccountBalance({ address });
-  return query.isLoading ? (
-    <ActivityIndicator animating={true} />
-  ) : query.data ? (
-    <Text style={styles.accountBalance}>{query.data?.value.uiAmount}</Text>
-  ) : (
-    <Text>Error</Text>
-  );
+  if (query.isLoading) {
+    return <ActivityIndicator animating={true} />;
+  } else if (query.data) {
+    return (
+      <Text style={styles.accountBalance}>{query.data?.value.uiAmount}</Text>
+    );
+  } else {
+    return <Text>Error</Text>;
+  }
 }
 
 const styles = StyleSheet.create({
   accountBalance: {
     marginTop: 12,
+    alignItems: "flex-start",
   },
   accountButtonGroup: {
     paddingVertical: 4,

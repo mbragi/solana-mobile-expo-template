@@ -36,8 +36,8 @@ function getAccountFromAuthorizedAccount(account: AuthorizedAccount): Account {
   // Handle the wallet icon, ensuring it's in a usable data URI format
   const walletIcon = account.icon ? `data:image/png;base64,${account.icon}` : "https://placekitten.com/50/50"; // Change the type as needed (e.g., image/svg+xml, image/webp)
 
-  // Generate a display address
-  const display_address = `${account.address.slice(0, 6)}...`;
+  // Generate a display address from address for easy UI display from first six and last four characters
+  const display_address = `${account.address.slice(0, 6)}...${account.address.slice(-4)}`;
 
   return {
     ...account,
@@ -132,7 +132,7 @@ export function useAuthorization() {
         authorizationResult,
         authorization?.selectedAccount
       );
-      await setAuthorization(nextAuthorization);
+      setAuthorization(nextAuthorization);
       return nextAuthorization;
     },
     [authorization]
@@ -157,7 +157,7 @@ export function useAuthorization() {
         return;
       }
       await wallet.deauthorize({ auth_token: authorization.authToken });
-      await setAuthorization(null);
+      setAuthorization(null);
     },
     [authorization]
   );

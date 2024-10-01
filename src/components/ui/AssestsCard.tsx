@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { AccountTokenBalance } from "../account/account-ui";
-import { PublicKey } from "@solana/web3.js";
+
 interface AssetVisibilityToggleProps {
   title: string;
   amount: string;
-  address?: PublicKey;
+  children?: React.ReactNode;
 }
-const AssetsCard = ({ title, amount, address }: AssetVisibilityToggleProps) => {
+
+const AssetsCard = ({ title, amount, children }: AssetVisibilityToggleProps) => {
   const [showAssets, setShowAssets] = useState(true);
+
   return (
     <LinearGradient
       colors={["#4CAF50", "#FFFFFF"]}
@@ -29,16 +30,10 @@ const AssetsCard = ({ title, amount, address }: AssetVisibilityToggleProps) => {
       />
       <View>
         <Text style={styles.assetsTitle}>{title}</Text>
-        {!showAssets ? (
-          <>
-            {address ? (
-              <AccountTokenBalance address={address as PublicKey} />
-            ) : (
-              <Text style={styles.assetsAmount}>{amount}</Text>
-            )}
-          </>
-        ) : (
+        {showAssets ? (
           <Text style={styles.assetsHidden}>*****</Text>
+        ) : (
+          children || <Text style={styles.assetsAmount}>{amount}</Text>
         )}
       </View>
     </LinearGradient>

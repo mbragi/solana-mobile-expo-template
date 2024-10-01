@@ -6,6 +6,7 @@ import { useMobileWallet } from "@/hooks/useMobileWallet";
 import { Linking, Platform, Text } from "react-native";
 import { CustomButton } from "@/components/ui/button";
 import { SolanaMobileWalletAdapterError } from "@solana-mobile/mobile-wallet-adapter-protocol";
+import { router } from "expo-router";
 
 export function ConnectButton() {
   const { authorizeSession } = useAuthorization();
@@ -18,7 +19,8 @@ export function ConnectButton() {
         return;
       }
       setAuthorizationInProgress(true);
-      await connect();
+      // await connect();
+      router.replace("/(tabs)/man")
     } catch (err: any) {
       console.log("Error caught:", err);
 

@@ -1,10 +1,13 @@
 import { FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { View, Text, Image, SafeAreaView, StyleSheet } from "react-native";
 import AssetsCard from "../ui/AssestsCard";
+import { AccountBalance } from "../account/account-ui";
+import { useAuthorization } from "@/hooks/useAuthorization";
 
 export function ProfileFeature() {
+  const { selectedAccount } = useAuthorization();
+
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
@@ -23,8 +26,12 @@ export function ProfileFeature() {
         </View>
       </View>
 
-       {/* Assets Section */}
-       <AssetsCard title="ASSET BALANCE" amount="2,000 TRC" />
+        {/* Assets Section */}
+        <AssetsCard title="ASSET BALANCE" amount="2,000 TRC">
+        {selectedAccount && (
+          <AccountBalance address={selectedAccount.publicKey} />
+        )}
+      </AssetsCard>
 
       {/* Categories (Airtime, Data, TV, Electricity) */}
       <View style={styles.categoriesContainer}>

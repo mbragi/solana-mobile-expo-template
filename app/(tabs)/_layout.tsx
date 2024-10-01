@@ -1,9 +1,30 @@
 import { Tabs } from "expo-router";
 import React from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { Ionicons } from "@expo/vector-icons";
 import { View, StyleSheet } from "react-native";
+
+const HomeIcon = ({ focused }: { focused: boolean }) => (
+  <TabBarIcon name={focused ? "home" : "home-outline"} color="white" />
+);
+
+const SwapIcon = () => (
+  <Ionicons name="swap-horizontal" size={26} color="white" />
+);
+
+const OrderIcon = () => (
+  <View style={styles.orderButton}>
+    <Ionicons name="add" size={26} color="white" />
+  </View>
+);
+
+const WalletIcon = () => (
+  <Ionicons name="wallet" size={26} color="white" />
+);
+
+const CommunityIcon = () => (
+  <Ionicons name="people" size={26} color="white" />
+);
 
 export default function TabLayout() {
 
@@ -21,9 +42,7 @@ export default function TabLayout() {
         name="main"
         options={{
           title: "Home",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon name={focused ? "home" : "home-outline"} color="white" />
-          ),
+          tabBarIcon: HomeIcon,
         }}
       />
 
@@ -31,9 +50,7 @@ export default function TabLayout() {
         name="explore"
         options={{
           title: "Swap",
-          tabBarIcon: ({ focused }) => (
-            <Ionicons name="swap-horizontal" size={26} color="white" />
-          ),
+          tabBarIcon: SwapIcon,
         }}
       />
 
@@ -41,11 +58,7 @@ export default function TabLayout() {
         name="order"
         options={{
           title: "Order",
-          tabBarIcon: ({ focused }) => (
-            <View style={styles.orderButton}>
-              <Ionicons name="add" size={26} color="white" />
-            </View>
-          ),
+          tabBarIcon: OrderIcon,
         }}
       />
 
@@ -53,9 +66,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Wallet",
-          tabBarIcon: ({ focused }) => (
-            <Ionicons name="wallet" size={26} color="white" />
-          ),
+          tabBarIcon: WalletIcon,
         }}
       />
 
@@ -63,9 +74,7 @@ export default function TabLayout() {
         name="community"
         options={{
           title: "Community",
-          tabBarIcon: ({ focused }) => (
-            <Ionicons name="people" size={26} color="white" />
-          ),
+          tabBarIcon: CommunityIcon,
         }}
       />
     </Tabs>
@@ -78,7 +87,7 @@ const styles = StyleSheet.create({
     borderTopColor: "black",
     position: "absolute",
     justifyContent: "space-around",
-    alignItems: "center",
+    alignItems: "baseline",
     shadowColor: "black",
     height: 60,
     paddingBottom: 20,

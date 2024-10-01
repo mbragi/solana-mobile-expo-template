@@ -12,10 +12,14 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useMobileWallet } from "@/hooks/useMobileWallet";
 import { useAuthorization } from "@/hooks/useAuthorization";
 import AssetsCard from "@/components/ui/AssestsCard"; // Import the new component
+import { AccountBalance } from "@/components/account/account-ui";
 
 export default function Tab() {
   const { disconnect } = useMobileWallet();
   const { selectedAccount } = useAuthorization();
+
+  // Dummy data for collectibles
+  const collectibles: any[] = [];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -28,7 +32,9 @@ export default function Tab() {
             style={styles.profileImage}
           />
           {/* Username */}
-          <Text style={styles.username}>{selectedAccount?.display_address}</Text>
+          <Text style={styles.username}>
+            {selectedAccount?.display_address}
+          </Text>
         </View>
         <View style={styles.iconContainer}>
           <FontAwesome name="search" size={24} color="white" />
@@ -44,7 +50,11 @@ export default function Tab() {
       </View>
 
       {/* Assets Section */}
-      <AssetsCard title="ASSET BALANCE" amount="2,000 TRC" address={selectedAccount.publicKey} />
+      <AssetsCard title="ASSET BALANCE" amount="2,000 TRC">
+        {selectedAccount && (
+          <AccountBalance address={selectedAccount.publicKey} />
+        )}
+      </AssetsCard>
 
       {/* Collectibles Section */}
       <ScrollView style={styles.collectiblesContainer}>
@@ -52,24 +62,32 @@ export default function Tab() {
 
         {/* Grid of Collectibles */}
         <View style={styles.collectiblesGrid}>
-          {[...Array(6)].map((_, index) => (
-            <View key={index} style={styles.collectibleCard}>
+            {collectibles.length === 0 ? (
+            <View style={{ flex: 1, justifyContent: "center", alignItems: "center", minHeight:'50%' }}>
+              <Text style={{ color: "white", fontSize: 18, marginBottom: 16 }}>
+              Create Trash Order
+              </Text>
+            </View>
+            ) : (
+            collectibles.map((collectible, index) => (
+              <View key={index} style={styles.collectibleCard}>
               {/* Image */}
               <Image
-                source={{ uri: "https://via.placeholder.com/200x150" }}
+                source={{ uri: collectible.imageUri }}
                 style={styles.collectibleImage}
               />
               {/* Collectible Info */}
-              <Text style={styles.collectibleName}>TrashB 50cl</Text>
-              <Text style={styles.collectibleQuantity}>Quantity: 2x</Text>
-              <Text style={styles.collectibleAmount}>Amount: 50cl</Text>
+              <Text style={styles.collectibleName}>{collectible.name}</Text>
+              <Text style={styles.collectibleQuantity}>Quantity: {collectible.quantity}</Text>
+              <Text style={styles.collectibleAmount}>Amount: {collectible.amount}</Text>
 
               {/* Redeem Button */}
               <TouchableOpacity style={styles.redeemButton}>
                 <Text style={styles.redeemButtonText}>Redeem</Text>
               </TouchableOpacity>
-            </View>
-          ))}
+              </View>
+            ))
+            )}
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -41,15 +41,6 @@
     "plugins": [
       "expo-router",
       "expo-image-picker"
-    ],
-    "updates": {
-      "enabled": true,
-      "checkAutomatically": "ON_ERROR_RECOVERY",
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/2c3633bb-3939-4f52-975d-2f2f3eadfd5a"
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    }
+    ]
   }
 }
